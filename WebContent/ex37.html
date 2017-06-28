@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>sample1</title>
+<script type="text/javascript" src="./jquery/jquery-1.9.0.js"></script>
+<script type="text/javascript">
+	var ImageViewer = {
+		images : [ "국화:Chrysanthemum.jpg", "사막:Desert.jpg",
+				"수국:Hydrangeas.jpg", "해파리:Jellyfish.jpg", "코알라:Koala.jpg",
+				"등대:Lighthouse.jpg", "펭귄:Penguins.jpg", "툴립:Tulips.jpg" ],
+		init : function() {
+			
+			$(".image-view button").click(this.onChangeImage);
+
+			$(".image-view img").mousedown(this.onChangeImage).dblclick(
+					this.onImageDBLClick);
+		},
+
+		onImageDBLClick : function() {
+			var imgName = $(this).attr("alt");
+			alert(imgName);
+		},
+		onChangeImage : function() {
+			// 랜덤 변수 
+			var result = Math
+					.floor(Math.random() * (ImageViewer.images.length)) + 1;
+			var imageInfo = ImageViewer.images[result - 1];
+			var infos = imageInfo.split(":");
+
+			$("img").attr({
+				"src" : "images/" + infos[1],
+				"alt" : infos[0]
+			});
+		}
+	};
+/*
+	var images = [ "국화:Chrysanthemum.jpg", "사막:Desert.jpg",
+			"수국:Hydrangeas.jpg", "해파리:Jellyfish.jpg", "코알라:Koala.jpg",
+			"등대:Lighthouse.jpg", "펭귄:Penguins.jpg", "툴립:Tulips.jpg" ];
+
+	//jQuery 외부로 빼내어 함수를 재사용 할 수 있도록한다.
+	var changeImage = function() {
+		// 랜덤 변수 
+		var result = Math.floor(Math.random() * (images.length)) + 1;
+		var imageInfo = images[result - 1];
+		var infos = imageInfo.split(":");
+
+		$("img").attr({
+			"src" : "images/" + infos[1],
+			"alt" : infos[0]
+		});
+	}
+
+	$(function() {
+
+		$("button").click(changeImage);
+
+		$("img").dblclick(function() {
+			var imgName = $(this).attr("alt");
+			alert(imgName);
+		});
+
+		$("img").mousedown(changeImage);
+
+	});
+	*/
+	$(function(){
+		ImageViewer.init();
+	});
+</script>
+</head>
+<body>
+	<div class="image-view">
+		<button>화면을 변경</button>
+		<p>
+			<img src="images/Desert.jpg" alt="사막" />
+		</p>
+	</div>
+</body>
+</html>
